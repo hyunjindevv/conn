@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: conn-backend
+
+  datasource:
+    url: jdbc:mariadb://localhost:3306/conn
+    username: ${CONN_DB_USERNAME}
+    password: ${CONN_DB_PASSWORD}
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+
+
+  flyway:
+    enabled: true
