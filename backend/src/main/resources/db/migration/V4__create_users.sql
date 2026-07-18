@@ -1,0 +1,25 @@
+CREATE TABLE users
+(
+    id              BIGINT       NOT NULL AUTO_INCREMENT,
+    company_id      BIGINT       NOT NULL,
+    department_id   BIGINT       NOT NULL,
+    login_id        VARCHAR(50)  NOT NULL,
+    password_hash   VARCHAR(255) NOT NULL,
+    name            VARCHAR(100) NOT NULL,
+    employee_number VARCHAR(30),
+    email           VARCHAR(255),
+    status          VARCHAR(20)  NOT NULL,
+    created_at      DATETIME(6) NOT NULL,
+    created_by      BIGINT,
+    updated_at      DATETIME(6) NOT NULL,
+    updated_by      BIGINT,
+    CONSTRAINT pk_users PRIMARY KEY (id),
+    CONSTRAINT uk_users_company_login_id UNIQUE (company_id, login_id),
+    CONSTRAINT uk_users_company_employee_number UNIQUE (company_id, employee_number),
+    CONSTRAINT uk_users_company_email UNIQUE (company_id, email),
+    CONSTRAINT uk_users_company_id_id UNIQUE (company_id, id),
+    CONSTRAINT chk_users_login_id_format CHECK ( login_id REGEXP '^[A-Za-z0-9._-]{4,50}$') ,
+    CONSTRAINT chk_users_status CHECK (status IN ('PENDING','ACTIVE','LOCKED','INACTIVE','DELETED')),
+    CONSTRAINT fk_users_company FOREIGN KEY (company_id) REFERENCES companies (id) ON DELETE RESTRICT,
+    CONSTRAINT fk_users_department FOREIGN KEY (company_id, department_id) REFERENCES departments(company_id, id) ON DELETE RESTRICT
+);
