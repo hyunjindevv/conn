@@ -42,4 +42,24 @@ public class User extends BaseEntity {
 
     protected User() {
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getLoginId() {
+        return loginId;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public UserStatus getStatus() {
+        return status;
+    }
 }
