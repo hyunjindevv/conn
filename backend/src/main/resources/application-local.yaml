@@ -3,3 +3,7 @@ spring:
     locations:
       - classpath:db/migration
       - classpath:db/seed
+
+conn:
+  security:
+    default-company-code: CONN
