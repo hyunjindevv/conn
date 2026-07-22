@@ -3,7 +3,6 @@ package io.github.hyunjindevv.conn.security.authentication;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
 import tools.jackson.databind.ObjectMapper;
 
@@ -38,7 +37,7 @@ class JsonUsernamePasswordAuthenticationConverterTest {
     }
 
     @Test
-    void throwsAuthenticationServiceExceptionForInvalidJson() {
+    void throwsInvalidLoginRequestExceptionForInvalidJson() {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -50,8 +49,8 @@ class JsonUsernamePasswordAuthenticationConverterTest {
                 "{ invalid-json".getBytes(StandardCharsets.UTF_8)
         );
 
-        AuthenticationServiceException exception = assertThrows(
-                AuthenticationServiceException.class,
+        InvalidLoginRequestException exception = assertThrows(
+                InvalidLoginRequestException.class,
                 () -> converter.convert(request)
         );
 
